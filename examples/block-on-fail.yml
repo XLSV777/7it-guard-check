@@ -1,0 +1,27 @@
+# Copy to .github/workflows/7it-guard.yml in your site's repository.
+# Block mode: the job fails only when the result is "fail".
+# A busy or unreachable 7IT service never fails the job.
+name: 7IT Guard
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  id-token: write       # lets 7IT Guard confirm the repository (GitHub OIDC token)
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - id: guard
+        uses: XLSV777/7it-guard-check@v1
+        with:
+          site: https://example.com
+          on-problem: block
+          comment: off
+          ownership-pr: off
+      - if: always()
+        env:
+          STATUS: ${{ steps.guard.outputs.status }}
+          COUNT: ${{ steps.guard.outputs.findings-count }}
+          RESULT: ${{ steps.guard.outputs.result-url }}
+        run: echo "7IT Guard said $STATUS ($COUNT findings) $RESULT"

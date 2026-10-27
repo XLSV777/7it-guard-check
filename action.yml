@@ -1,0 +1,43 @@
+name: '7IT Guard check'
+description: 'Check your live site or deploy preview from the outside on every push or PR, with fixes you can paste.'
+author: '7IT'
+branding:
+  icon: 'shield'
+  color: 'blue'
+inputs:
+  site:
+    description: 'URL of the site to check. Required unless the run is a successful deploy preview (deployment_status), which is detected automatically.'
+    required: false
+    default: ''
+  on-problem:
+    description: '"warn" (default) never fails the job and adds warnings. "block" fails the job only when the result is "fail".'
+    required: false
+    default: 'warn'
+  comment:
+    description: '"auto" (default) posts one PR comment, updated in place, when the token has pull-requests: write. "off" never comments.'
+    required: false
+    default: 'auto'
+  ownership-pr:
+    description: '"auto" (default) opens one pull request that adds the ownership file when the site is not proven yet. Needs contents: write and pull-requests: write. "off" never opens it.'
+    required: false
+    default: 'auto'
+  github-token:
+    description: 'Token used only for the PR comment and the ownership pull request. Defaults to the workflow token.'
+    required: false
+    default: ${{ github.token }}
+  endpoint:
+    description: 'For testing only. Leave unset.'
+    required: false
+    default: ''
+outputs:
+  status:
+    description: '"pass", "warn", "fail", or "skipped" when no check ran.'
+  result-url:
+    description: 'Link to the full result on 7it.co.il.'
+  findings-count:
+    description: 'Number of findings.'
+  ownership-pr:
+    description: 'Link to the ownership pull request, when one was opened or is open.'
+runs:
+  using: 'node24'
+  main: 'src/index.mjs'

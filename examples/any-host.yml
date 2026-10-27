@@ -1,0 +1,18 @@
+# Copy to .github/workflows/7it-guard.yml in your site's repository.
+# Works with any host: checks the live site on every push to main and every PR.
+name: 7IT Guard
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  id-token: write       # lets 7IT Guard confirm the repository (GitHub OIDC token)
+  contents: write       # lets 7IT Guard open the one-time ownership pull request
+  pull-requests: write
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: XLSV777/7it-guard-check@v1
+        with:
+          site: https://example.com

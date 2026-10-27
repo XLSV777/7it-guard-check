@@ -1,0 +1,17 @@
+# Copy to .github/workflows/7it-guard.yml in your site's repository.
+# Runs when Vercel or Netlify reports a successful deployment.
+# Deploy previews are detected automatically; `site` is used for production.
+name: 7IT Guard
+on: deployment_status
+permissions:
+  id-token: write       # lets 7IT Guard confirm the repository (GitHub OIDC token)
+  contents: write       # lets 7IT Guard open the one-time ownership pull request
+  pull-requests: write
+jobs:
+  guard:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: XLSV777/7it-guard-check@v1
+        with:
+          site: https://example.com
