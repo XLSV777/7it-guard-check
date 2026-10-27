@@ -7,7 +7,7 @@ import { createHash } from 'node:crypto';
 import { appendFileSync, readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
-export const VERSION = '1.0.0';
+export const VERSION = '1.1.0';
 export const DEFAULT_ENDPOINT = 'https://7it.co.il/guard/check';
 export const NAME = '7IT Guard';
 export const COMMENT_MARKER = '<!-- 7it-guard-check:comment -->';

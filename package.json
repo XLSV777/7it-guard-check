@@ -1,6 +1,6 @@
 {
   "name": "7it-guard-check",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "7IT Guard check: a GitHub Action that checks your site from the outside.",
   "private": true,
   "type": "module",

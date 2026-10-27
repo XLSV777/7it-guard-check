@@ -4,7 +4,7 @@ All notable changes to 7IT Guard check. Versions follow [Semantic Versioning](ht
 
 ## [Unreleased]
 
-Planned as 1.1.0.
+## [1.1.0] - 2026-10-27
 
 ### Added
 
